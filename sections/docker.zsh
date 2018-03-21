@@ -52,6 +52,9 @@ spaceship_docker() {
   local docker_version=$(docker version -f "{{.Server.Version}}" 2>/dev/null)
   [[ -z $docker_version ]] && return
 
+  # Support for $COMPOSE_PROJECT_NAME (docker env vars)
+  [[ ! -z "$COMPOSE_PROJECT_NAME" ]] && local project_name="($COMPOSE_PROJECT_NAME)"
+
   if [[ -n $DOCKER_MACHINE_NAME ]]; then
     docker_version+=" via ($DOCKER_MACHINE_NAME)"
   fi
@@ -61,4 +64,10 @@ spaceship_docker() {
     "$SPACESHIP_DOCKER_PREFIX" \
     "${SPACESHIP_DOCKER_SYMBOL}v${docker_version}" \
     "$SPACESHIP_DOCKER_SUFFIX"
+
+  if [[ -n "$project_name" ]]; then
+    spaceship::section \
+      "red" \
+      "$project_name "
+  fi
 }
