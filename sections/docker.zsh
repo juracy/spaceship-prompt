@@ -13,6 +13,7 @@ SPACESHIP_DOCKER_PREFIX="${SPACESHIP_DOCKER_PREFIX="on "}"
 SPACESHIP_DOCKER_SUFFIX="${SPACESHIP_DOCKER_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"}"
 SPACESHIP_DOCKER_SYMBOL="${SPACESHIP_DOCKER_SYMBOL="🐳 "}"
 SPACESHIP_DOCKER_COLOR="${SPACESHIP_DOCKER_COLOR="cyan"}"
+SPACESHIP_DOCKER_PROJECT_NAME_COLOR="${SPACESHIP_DOCKER_PROJECT_NAME_COLOR="red"}"
 
 # ------------------------------------------------------------------------------
 # Section
@@ -53,7 +54,7 @@ spaceship_docker() {
   [[ -z $docker_version ]] && return
 
   # Support for $COMPOSE_PROJECT_NAME (docker env vars)
-  [[ ! -z "$COMPOSE_PROJECT_NAME" ]] && local project_name="($COMPOSE_PROJECT_NAME)"
+  [[ ! -z "$COMPOSE_PROJECT_NAME" ]] && local project_name="$COMPOSE_PROJECT_NAME"
 
   if [[ -n $DOCKER_MACHINE_NAME ]]; then
     docker_version+=" via ($DOCKER_MACHINE_NAME)"
@@ -67,7 +68,7 @@ spaceship_docker() {
 
   if [[ -n "$project_name" ]]; then
     spaceship::section \
-      "red" \
-      "$project_name "
+      "$SPACESHIP_DOCKER_PROJECT_NAME_COLOR" \
+      "${SPACESHIP_DOCKER_SYMBOL}${project_name} "
   fi
 }
