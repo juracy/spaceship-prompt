@@ -135,6 +135,7 @@ Directory is always shown and truncated to the value of `SPACESHIP_DIR_TRUNC`. W
 | `SPACESHIP_DIR_PREFIX` | `in·` | Prefix before current directory |
 | `SPACESHIP_DIR_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after current directory |
 | `SPACESHIP_DIR_TRUNC` | `3` | Number of folders of cwd to show in prompt, 0 to show all |
+| `SPACESHIP_DIR_TRUNC_PREFIX` | ` ` | Prefix before cwd when it's truncated. For example `…/` or `.../`, empty to disable |
 | `SPACESHIP_DIR_TRUNC_REPO` | `true` | While in `git` repo, show only root directory and folders inside it |
 | `SPACESHIP_DIR_COLOR` | `cyan` | Color of directory section |
 
@@ -373,6 +374,7 @@ The environment variables `COMPOSE_PATH_SEPARATOR` and `COMPOSE_PROJECT_NAME` ar
 | `SPACESHIP_DOCKER_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after the Docker section |
 | `SPACESHIP_DOCKER_SYMBOL` | `🐳·` | Character to be shown before Docker version |
 | `SPACESHIP_DOCKER_COLOR` | `cyan` | Color of Docker section |
+| `SPACESHIP_DOCKER_VERBOSE` | `false` | Show complete Docker version |
 
 ### Amazon Web Services (AWS) (`aws`)
 
@@ -525,6 +527,9 @@ This section show only when there are active jobs in the background.
 | `SPACESHIP_JOBS_SUFFIX` | ` ` | Suffix after the jobs indicator |
 | `SPACESHIP_JOBS_SYMBOL` | `✦` | Character to be shown when jobs are hiding |
 | `SPACESHIP_JOBS_COLOR` | `blue` | Color of background jobs section |
+| `SPACESHIP_JOBS_AMOUNT_PREFIX` | ` ` | Prefix before the number of jobs (between jobs indicator and jobs amount) |
+| `SPACESHIP_JOBS_AMOUNT_SUFFIX` | ` ` | Suffix after the number of jobs |
+| `SPACESHIP_JOBS_AMOUNT_THRESHOLD` | `1` | Number of jobs after which job count will be shown |
 
 ### Exit code (`exit_code`)
 
