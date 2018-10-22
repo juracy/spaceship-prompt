@@ -16,7 +16,7 @@ The default order is:
 
 ```zsh
 SPACESHIP_PROMPT_ORDER=(
-  time          # Time stampts section
+  time          # Time stamps section
   user          # Username section
   dir           # Current directory section
   host          # Hostname section
@@ -74,6 +74,8 @@ This group of options defines a behaviour of prompt and standard parameters for 
 | `SPACESHIP_CHAR_PREFIX` | ` ` | Prefix before prompt character |
 | `SPACESHIP_CHAR_SUFFIX` | ` ` | Suffix after prompt character |
 | `SPACESHIP_CHAR_SYMBOL` | `➜ ` | Prompt character to be shown before any command |
+| `SPACESHIP_CHAR_SYMBOL_ROOT` | `$SPACESHIP_CHAR_SYMBOL` | Prompt character to be shown before any command for the root user |
+| `SPACESHIP_CHAR_SYMBOL_SECONDARY` | `$SPACESHIP_CHAR_SYMBOL` | Secondary prompt character to be shown for incomplete commands |
 | `SPACESHIP_CHAR_COLOR_SUCCESS` | `green` | Color of prompt character if last command completes successfully |
 | `SPACESHIP_CHAR_COLOR_FAILURE` | `red` | Color of prompt character if last command returns non-zero exit-code |
 | `SPACESHIP_CHAR_COLOR_SECONDARY` | `yellow` | Color of secondary prompt character |
@@ -128,6 +130,7 @@ Hostname is shown only when you're connected via SSH unless you change this beha
 ### Directory (`dir`)
 
 Directory is always shown and truncated to the value of `SPACESHIP_DIR_TRUNC`. While you are in repository, it shows only root directory and folders inside it.
+If current directory is write-protected or if current user has not enough rights to write in it, a padlock (by default) is displayed as a suffix.
 
 | Variable | Default | Meaning |
 | :------- | :-----: | ------- |
@@ -138,6 +141,8 @@ Directory is always shown and truncated to the value of `SPACESHIP_DIR_TRUNC`. W
 | `SPACESHIP_DIR_TRUNC_PREFIX` | ` ` | Prefix before cwd when it's truncated. For example `…/` or `.../`, empty to disable |
 | `SPACESHIP_DIR_TRUNC_REPO` | `true` | While in `git` repo, show only root directory and folders inside it |
 | `SPACESHIP_DIR_COLOR` | `cyan` | Color of directory section |
+| `SPACESHIP_DIR_LOCK_SYMBOL` | `·` | The symbol displayed if directory is write-protected |
+| `SPACESHIP_DIR_LOCK_COLOR` | `red` | Color for the lock symbol |
 
 ### Git (`git`)
 
@@ -178,7 +183,7 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_STATUS_UNMERGED` | `=` | Indicator for unmerged changes |
 | `SPACESHIP_GIT_STATUS_AHEAD` | `⇡` | Indicator for unpushed changes (ahead of remote branch) |
 | `SPACESHIP_GIT_STATUS_BEHIND` | `⇣` | Indicator for unpulled changes (behind of remote branch) |
-| `SPACESHIP_GIT_STATUS_DIVERGED` | `⇕` | Indicator for diverged chages (diverged with remote branch) |
+| `SPACESHIP_GIT_STATUS_DIVERGED` | `⇕` | Indicator for diverged changes (diverged with remote branch) |
 
 ### Mercurial (`hg`)
 
@@ -259,6 +264,18 @@ Ruby section is shown only in directories that contain `Gemfile`, or `Rakefile`,
 | `SPACESHIP_RUBY_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after Ruby section |
 | `SPACESHIP_RUBY_SYMBOL` | `💎·` | Character to be shown before Ruby version |
 | `SPACESHIP_RUBY_COLOR` | `red` | Color of Ruby section |
+
+### Elm (`elm`)
+
+Elm section is shown only in directories that contain `elm.json` file, `elm-package.json` file, `elm-stuff` directory, or any other file with `.elm` extension.
+
+| Variable | Default | Meaning |
+| :------- | :-----: | ------- |
+| `SPACESHIP_ELM_SHOW` | `true` | Show installed Elm version |
+| `SPACESHIP_ELM_PREFIX` | `$SPACESHIP_PROMPT_DEFAULT_PREFIX` | Prefix before Elm section |
+| `SPACESHIP_ELM_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after Elm section |
+| `SPACESHIP_ELM_SYMBOL` | `🌳·` | Character to be shown before Elm version |
+| `SPACESHIP_ELM_COLOR` | `cyan` | Color of Elm section |
 
 ### Elixir (`elixir`)
 
@@ -378,7 +395,7 @@ The environment variables `COMPOSE_PATH_SEPARATOR` and `COMPOSE_PROJECT_NAME` ar
 
 ### Amazon Web Services (AWS) (`aws`)
 
-Shows selected Amazon Web Services profile using '[named profiles](http://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html)'.
+Shows selected Amazon Web Services profile configured using  [`AWS_PROFILE`](http://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html) variable.
 
 | Variable | Default | Meaning |
 | :------- | :-----: | ------- |
