@@ -30,7 +30,7 @@ spaceship_docker() {
   local compose_exists=false
   if [[ -n "$COMPOSE_FILE" ]]; then
     # Use COMPOSE_PATH_SEPARATOR or colon as default
-    local separator="${COMPOSE_PATH_SEPARATOR=":"}"
+    local separator=${COMPOSE_PATH_SEPARATOR:-":"}
 
     # COMPOSE_FILE may have several filenames separated by colon, test all of them
     local filenames=("${(@ps/$separator/)COMPOSE_FILE}")
@@ -48,7 +48,7 @@ spaceship_docker() {
   fi
 
   # Show Docker status only for Docker-specific folders
-  [[ "$compose_exists" == true || -f Dockerfile || -f docker-compose.yml ]] || return
+  [[ "$compose_exists" == true || -f Dockerfile || -f docker-compose.yml || -f /.dockerenv ]] || return
 
   # if docker daemon isn't running you'll get an error saying it can't connect
   local docker_version=$(docker version -f "{{.Server.Version}}" 2>/dev/null)
